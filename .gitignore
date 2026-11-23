@@ -1,0 +1,22 @@
+__pycache__/
+.vscode/
+.ipynb_checkpoints/
+.env
+
+# models and weights
+*.pth
+*.pt
+*.faiss
+*.index
+*.pkl
+*.npy
+vectors/
+
+# data (only small samples and the distilled labels are committed)
+data/*
+!data/samples/
+!data/distilled_labels.csv
+!data/README.md
+
+*.log
+*.docx
