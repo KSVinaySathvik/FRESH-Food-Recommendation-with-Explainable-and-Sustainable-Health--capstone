@@ -1,10 +1,10 @@
 # FRESH: Food Recommendation with Explainable and Sustainable Health
 
-FRESH plans meals that respect hard constraints (diet, allergies, medical conditions) while ranking recipes by taste, nutrition and what is already in the user's pantry. It combines a neural ranker with symbolic constraint reasoning and LLM agents, and explains each recommendation.
+This repository contains the code for FRESH, the capstone project for the B.E. in Artificial Intelligence and Machine Learning at B.N.M. Institute of Technology, Bengaluru. FRESH plans meals that respect hard constraints (diet, allergies, medical conditions) while ranking recipes by taste, nutrition and what is already in the user's pantry. It combines a neural ranker with symbolic constraint reasoning and LLM agents, and explains each recommendation.
 
 ![FRESH architecture](docs/architecture.png)
 
-## How it works
+## Method
 
 A meal-plan request goes through two paths that meet at the ranker:
 
@@ -27,18 +27,15 @@ Ablation over regional, dietary, pantry and medical test scenarios, scored by th
 
 The soft constraint penalties account for most of the gain over plain embedding similarity. Removing the medical RAG or the pantry features does not change the scores on these scenarios. Per-scenario results are in `results/`, figures in `results/figures/`.
 
-## Layout
+## Repository Structure
 
-```
-src/          backend (main.py), dashboard (app.py), agents, ranker, training and evaluation
-pipeline/     recipe cleaning, metadata extraction, embeddings, FAISS index, nutrition PDF ingestion,
-              LLM-distilled training labels
-notebooks/    evaluation and analysis
-results/      evaluation tables, figures and preprocessing reports
-docs/         architecture figure, API schema and example request
-data/         small samples and the distilled labels; see data/README.md for the full set
-legacy/       the first, rule-based version of the recommender
-```
+- **src/**: the backend (`main.py`), the dashboard (`app.py`), the agents, the ranker, and training and evaluation code.
+- **pipeline/**: recipe cleaning, metadata extraction, embeddings, the FAISS index, ingestion of nutrition PDFs, and LLM-distilled training labels.
+- **notebooks/**: evaluation and analysis.
+- **results/**: evaluation tables, figures and preprocessing reports.
+- **docs/**: the architecture figure, the API schema and an example request.
+- **data/**: small samples and the distilled labels; `data/README.md` describes the full set.
+- **legacy/**: the first, rule-based version of the recommender.
 
 ## Setup
 
