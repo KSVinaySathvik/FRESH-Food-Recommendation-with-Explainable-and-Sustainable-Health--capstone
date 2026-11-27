@@ -13,9 +13,9 @@ A meal-plan request goes through two paths that meet at the ranker:
 - **Constraints.** Lagrangian soft constraint penalties (SCP) push down any recipe that violates a diet, allergy or avoidance rule, with multipliers that adapt to the observed violation rate. Whole-word keyword filters run first (so "egg" does not match "eggplant").
 - **Explanations and learning.** Each recommendation comes with Shapley-value feature attributions and a short narrative. Cooking and like events update the user's taste vector online.
 
-## Results
+## Evaluation
 
-Ablation over regional, dietary, pantry and medical test scenarios, scored by the rule-based relevance judge in `src/fresh_metrics.py` (`notebooks/evaluation.ipynb`):
+`notebooks/evaluation.ipynb` runs an ablation on five query scenarios (vegan breakfast, high-protein dinner, gluten-free lunch, Indian curry, healthy smoothie). Each query is scored against its top 100 FAISS candidates plus hard negatives that violate the constraint, and relevance is judged by keyword rules (`is_relevant` in the notebook).
 
 | Variant | NDCG@10 | Precision@10 |
 | --- | --- | --- |
@@ -25,7 +25,7 @@ Ablation over regional, dietary, pantry and medical test scenarios, scored by th
 | Without pantry features | 0.991 | 0.98 |
 | Embedding similarity only (no neural ranker) | 0.588 | 0.36 |
 
-The soft constraint penalties account for most of the gain over plain embedding similarity. Removing the medical RAG or the pantry features does not change the scores on these scenarios. Per-scenario results are in `results/`, figures in `results/figures/`.
+This is a check that the constraint handling works, not a measure of recommendation quality. The soft constraint penalty uses the same keyword rules as the relevance judge, so the full model scores close to 1.0 by construction. Removing the medical RAG or the pantry features does not change the scores because none of the five scenarios involves a medical condition or a pantry. Measuring recommendation quality would need held-out interaction data or a user study.
 
 ## Repository Structure
 
